@@ -17,7 +17,7 @@ const saveTodos = function (todos) {
 }
 
 // Setup filters (searchText) and wire up a new filter input to change it
-// renderTodos function to render and rerender the latest filtered data
+// Render and rerender the latest filtered data
 
 const renderTodos = function (todos, filters) {
     // Gets array containing not completed todos for summary and filtering purposes
@@ -43,7 +43,7 @@ const renderTodos = function (todos, filters) {
     document.querySelector('#todo-list').innerHTML = '';
     document.querySelector('#todo-list').appendChild(generateSummaryDOM(incompleteTodos));
 
-    // Puts all incomplete todos on page as paragraphs
+    // Puts all incomplete todos on page under individual containers
     filteredTodos.forEach(function (todo) {
         document.querySelector('#todo-list').appendChild(generateTodoDOM(todo));
     });
@@ -56,6 +56,7 @@ const generateTodoDOM = function (todo) {
     const newCheckbox = document.createElement('input');
     const removeButton = document.createElement('button');
 
+    // Set up checkbox
     newCheckbox.setAttribute('type', 'checkbox');
     newTodo.appendChild(newCheckbox);
 
@@ -67,6 +68,7 @@ const generateTodoDOM = function (todo) {
     };
     newTodo.appendChild(todoText);
 
+    // Set up delete button
     removeButton.textContent = 'Delete';
     newTodo.appendChild(removeButton);
     
