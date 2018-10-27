@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>To-do List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+
+</head>
+<body>
+    <h1>To-do List</h1>
+    <input id="search-text" placeholder="Filter your todos">
+    <label>
+        <input id="hide-completed" type="checkbox"> Hide completed todos
+    </label>
+
+    <form id="todo-form">
+            <input type="text" placeholder="New todo" name="newTodo">
+            <button>Add Todo</button>
+    </form>
+    <div id="todo-list"></div>
+    <script src="functions.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
