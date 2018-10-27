@@ -16,16 +16,31 @@ const saveTodos = function (todos) {
     localStorage.setItem('todos-stored', JSON.stringify(todos));
 }
 
-// Removes a todo from list based on its unique ID
-const removeTodo = function (id) {
+const findTodoByID = function (id) {
     const todoIndex = todos.findIndex(function (todo) {
         return todo.id === id;
     });
+    return todoIndex;
+}
+
+// Removes a todo from list based on its unique ID
+const removeTodo = function (id) {
+    const todoIndex = findTodoByID(id);
 
     if (todoIndex > -1) {
         todos.splice(todoIndex, 1);
     };
 }
+
+// Toggles a todo's completed value
+const toggleTodo = function (id) {
+    const todoIndex = findTodoByID(id);
+
+    // Flips completed value to its opposite
+    if (todoIndex > -1) {
+        todos[todoIndex].completed = !todos[todoIndex].completed;
+    };
+};
 
 // Setup filters (searchText) and wire up a new filter input to change it
 // Render and rerender the latest filtered data
@@ -69,7 +84,15 @@ const generateTodoDOM = function (todo) {
 
     // Set up checkbox
     newCheckbox.setAttribute('type', 'checkbox');
+    // Tells user if todo is completed by checking it off
+    newCheckbox.checked = todo.completed;
     newTodo.appendChild(newCheckbox);
+    // Allows user to set todo's completed status
+    newCheckbox.addEventListener('change', function (e) {
+        toggleTodo(todo.id);
+        saveTodos(todos);
+        renderTodos(todos, filters);
+    })
 
     // Determines what to display if new todo button clicked without user input
     if (todo.text.length > 0) {
