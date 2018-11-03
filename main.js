@@ -11,7 +11,7 @@ renderTodos(todos, filters);
 
 // Listen for filter input field, change search text value to that of input
 // field, renders filtered todos to page
-document.querySelector('#search-text').addEventListener('input', function (e) {
+document.querySelector('#search-text').addEventListener('input', (e) => {
     filters.searchText = e.target.value;
     renderTodos(todos, filters);
 });
@@ -21,7 +21,7 @@ document.querySelector('#search-text').addEventListener('input', function (e) {
 // Add new item to todos array with that text data (completed value of false)
 // Rerender the application
 
-document.querySelector('#todo-form').addEventListener('submit', function (e) {
+document.querySelector('#todo-form').addEventListener('submit', (e) => {
     e.preventDefault();
     todos.push({
         id: uuidv4(),
@@ -38,7 +38,7 @@ document.querySelector('#todo-form').addEventListener('submit', function (e) {
 // Update hideCompleted and rerender list on checkbox change
 // Setup renderTodos to remove completed items
 
-document.querySelector('#hide-completed').addEventListener('change', function (e) {
+document.querySelector('#hide-completed').addEventListener('change', (e) => {
     filters.hideCompleted = e.target.checked;
     renderTodos(todos, filters);
 });
