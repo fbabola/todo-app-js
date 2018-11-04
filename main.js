@@ -1,3 +1,5 @@
+'use strict';
+
 // Read and parse the data when the app starts up
 let todos = getSavedTodos();
 

@@ -1,12 +1,14 @@
+'use strict';
+
 // Gets todos saved by the specific user
 const getSavedTodos = () => {
     // Gets stored todos
     const todosJSON = localStorage.getItem('todos-stored');
 
-    // Updates todo list with stored todos
-    if (todosJSON !== null) {
-        return JSON.parse(todosJSON);
-    } else {
+    try {
+        // Updates todo list with stored todos
+        return todosJSON ? JSON.parse(todosJSON) : [];
+    } catch (e) {
         return [];
     };
 };
@@ -51,7 +53,7 @@ const renderTodos = (todos, filters) => {
     // todos
     // Not shorthand notation due to length of return lines
     let filteredTodos = [];
-    if (filters.hideCompleted === true) {
+    if (filters.hideCompleted) {
         filteredTodos = incompleteTodos.filter((todo) => {
             return todo.text.toLowerCase().includes(filters.searchText.toLowerCase());
         })
