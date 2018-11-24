@@ -63,16 +63,24 @@ const renderTodos = (todos, filters) => {
         });
     };
     
-
+    const todoList = document.querySelector('#todo-list');
     // Clears list for rendering purpose and generates line telling how many
     // todos left
-    document.querySelector('#todo-list').innerHTML = '';
-    document.querySelector('#todo-list').appendChild(generateSummaryDOM(incompleteTodos));
+    todoList.innerHTML = '';
+    todoList.appendChild(generateSummaryDOM(incompleteTodos));
 
     // Puts all incomplete todos on page under individual containers
-    filteredTodos.forEach((todo) => {
-        document.querySelector('#todo-list').appendChild(generateTodoDOM(todo));
-    });
+    if (filteredTodos.length > 0) {
+        filteredTodos.forEach((todo) => {
+            todoList.appendChild(generateTodoDOM(todo));
+        });
+    } else {
+        const emptyMessage = document.createElement('p');
+        emptyMessage.classList.add('empty-message');
+        emptyMessage.textContent = 'No todos to show';
+        todoList.appendChild(emptyMessage);
+    };
+    
 };
 
 // Get the DOM elements for an individual note
