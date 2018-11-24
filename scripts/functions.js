@@ -77,7 +77,8 @@ const renderTodos = (todos, filters) => {
 
 // Get the DOM elements for an individual note
 const generateTodoDOM = (todo) => {
-    const newTodo = document.createElement('div');
+    const newTodo = document.createElement('label');
+    const container = document.createElement('div');
     const todoText = document.createElement('span');
     const newCheckbox = document.createElement('input');
     const removeButton = document.createElement('button');
@@ -86,37 +87,47 @@ const generateTodoDOM = (todo) => {
     newCheckbox.setAttribute('type', 'checkbox');
     // Tells user if todo is completed by checking it off
     newCheckbox.checked = todo.completed;
-    newTodo.appendChild(newCheckbox);
+    container.appendChild(newCheckbox);
     // Allows user to set todo's completed status
     newCheckbox.addEventListener('change', (e) => {
         toggleTodo(todo.id);
         saveTodos(todos);
         renderTodos(todos, filters);
-    })
+    });
 
-    // Determines what to display if new todo button clicked without user input
-    if (todo.text.length > 0) {
-        todoText.textContent = todo.text;
-    } else {
-        todoText.textContent = 'Empty todo';
-    };
-    newTodo.appendChild(todoText);
+    // Set up todo text
+    todoText.textContent = todo.text;
+    container.appendChild(todoText);
+
+    // Set up the container
+    newTodo.classList.add('list-item');
+    container.classList.add('list-item__container');
+    newTodo.appendChild(container);
 
     // Set up delete button
     removeButton.textContent = 'Delete';
+    removeButton.classList.add('button', 'button--text');
     newTodo.appendChild(removeButton);
     removeButton.addEventListener('click', () => {
         removeTodo(todo.id);
         saveTodos(todos);
         renderTodos(todos, filters);
     });
-    
+
     return newTodo;
 };
 
 // Get the DOM elements for list summary
 const generateSummaryDOM = (incompleteTodos) => {
     const summary = document.createElement('h2');
-    summary.textContent = `You have ${incompleteTodos.length} todos left`;
+    summary.classList.add('list-title');
+    if (incompleteTodos.length > 1) {
+        summary.textContent = `You have ${incompleteTodos.length} todos left.`;
+    } else if (incompleteTodos.length === 1) {
+        summary.textContent = 'You have 1 todo left.';
+    } else {
+        summary.textContent = 'You have no todos left.';
+    };
+
     return summary;
 };

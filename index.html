@@ -3,23 +3,38 @@
 <head>
     <title>To-do List</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-
+    <link rel="stylesheet" type="text/css" media="screen" href="style.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <h1>To-do List</h1>
-    <input id="search-text" placeholder="Filter your todos">
-    <label>
-        <input id="hide-completed" type="checkbox"> Hide completed todos
-    </label>
+    <div class="header">
+        <div class="container">
+            <h1 class="header__title">To-do List</h1>
+            <h2 class="header__subtitle">What do you need to remember?</h2>
+        </div>
+    </div>
+    <div class="actions">
+        <div class="actions__container">
+            <input id="search-text" class="input" placeholder="Filter your todos">
+            <label class="checkbox">
+                <input id="hide-completed" type="checkbox"> Hide completed todos
+            </label>
+        </div>
+    </div>
 
-    <form id="todo-form">
-            <input type="text" placeholder="New todo" name="newTodo">
-            <button>Add Todo</button>
-    </form>
-    <div id="todo-list"></div>
-    <script src="uuidv4.js"></script>
-    <script src="functions.js"></script>
-    <script src="main.js"></script>
+    <div class="container">
+        <div id="todo-list"></div>
+        <form id="todo-form">
+                <input type="text" placeholder="New todo" name="newTodo" class="input">
+                <button class="button">Add Todo</button>
+        </form>
+    </div>
+    
+
+
+
+    <script src="scripts/uuidv4.js"></script>
+    <script src="scripts/functions.js"></script>
+    <script src="scripts/main.js"></script>
 </body>
 </html>

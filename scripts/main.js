@@ -25,11 +25,16 @@ document.querySelector('#search-text').addEventListener('input', (e) => {
 
 document.querySelector('#todo-form').addEventListener('submit', (e) => {
     e.preventDefault();
-    todos.push({
-        id: uuidv4(),
-        text: e.target.elements.newTodo.value,
-        completed: false
-    });
+    const inputText = e.target.elements.newTodo.value.trim();
+    if (inputText) {
+        todos.push({
+            id: uuidv4(),
+            text: inputText,
+            completed: false
+        });
+    } else {
+        return;
+    };
     saveTodos(todos);
     e.target.elements.newTodo.value = '';
     renderTodos(todos, filters);
